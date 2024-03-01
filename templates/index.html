@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Pet Adoption Agency</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="display-4 text-center">Welcome to the Pet Adoption Agency!</h1>
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <h2 class="display-3 mt-5 mb-3">Pets</h2>
+                <ul class="list-group">
+                    {% for pet in pets %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        {% if pet.photo_url %}
+                        <img src="{{ pet.photo_url }}" alt="{{ pet.name }}" class="mr-3" style="max-width: 100px;">
+                        {% endif %}
+                        <div>
+                            <a href="{{ url_for('pet_details', pet_id=pet.id) }}" class="font-weight-bold">{{ pet.name }}</a>
+                            {% if pet.available %}
+                            <span class="badge badge-success ml-2">is available</span>
+                            {% endif %}
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <a href="{{ url_for('add_pet') }}" class="btn btn-primary mt-4">Add a Pet</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
